@@ -1,7 +1,28 @@
 var imageRepository = new function(){
     this.background = new Image();
-    this.background.src = "imgs/bg.png"
-}
+    this.spaceship = new Image();
+    this.bullet = new Image();
+	var numImages = 3;
+	var numLoaded = 0;
+	function imageLoaded() {
+		numLoaded++;
+		if (numLoaded === numImages) {
+			window.init();
+		}
+	}
+	this.background.onload = function() {
+		imageLoaded();
+	};
+	this.spaceship.onload = function() {
+		imageLoaded();
+	};
+	this.bullet.onload = function() {
+		imageLoaded();
+	};
+    this.background.src = "imgs/bg.png";
+	this.spaceship.src = "imgs/ship.png";
+	this.bullet.src = "imgs/bullet.png";
+};
 
 function Drawable(){
     this.init = function(x,y, width, height){
