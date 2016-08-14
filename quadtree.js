@@ -24,6 +24,19 @@ function Quadtree(boundBox, lvl){
         return returnedObjects;
     };
 
+    this.findObjects = function (returnedObjects, obj) {
+        if(typeof obj === "undefined"){
+            return;
+        }
+        var index = this.getIndex(obj);
+        if(index != -1 && this.nodes.length){
+            this.nodes[index].getAllObjects(returnedObjects, obj);
+        }
+        for(var i = 0, len = objects.length; i < len; i++){
+            returnedObjects.push(objects[i]);
+        }
+    };
+
     this.insert = function(obj){
         if(typeof obj === "undefined"){
             return;
