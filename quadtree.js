@@ -35,7 +35,29 @@ function Quadtree(boundBox, lvl){
             return;
         }
         if(this.nodes.length){
+            var index = this.getIndex(obj);
+            if(index == -1){
+                this.nodes[index].insert(obj);
+                return;
+            }
+        }
+        objects.push(obj);
+        // where is level getting updated
+        if(objects.length > maxObjects && level < maxLevels){
+            if(this.nodes[0] == null){
+                this.split();
+            }
+            var i = 0;
+            while(i < objects.length){
+                var index = this.getIndex(objects[i]);
+                if(index == -1){
+                    this.nodes[index].insert(objects.splice(i,1)[0]);
+                }
+                else{
+                    i++;
+                }
 
+            }
         }
 
 
