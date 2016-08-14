@@ -24,6 +24,23 @@ function Quadtree(boundBox, lvl){
         return returnedObjects;
     };
 
+    this.insert = function(obj){
+        if(typeof obj === "undefined"){
+            return;
+        }
+        if(obj instanceof Array){
+            for(var i = 0, len=obj.length; i < len; i++){
+                this.insert(obj[i]);
+            }
+            return;
+        }
+        if(this.nodes.length){
+
+        }
+
+
+    };
+
     this.getIndex = function(){
         var index = -1;
         var verticalMidpoint = this.bounds.x + this.bounds.width/2;
@@ -64,20 +81,20 @@ function Quadtree(boundBox, lvl){
             width: subwidth,
             height: subheight
         }, level+1);
-        this.nodes[1] = new Quadtree({
+        this.nodes[3] = new Quadtree({
             x: this.bounds.x + subwidth,
-            y: this.bounds.y,
+            y: this.bounds.y + subheight,
             width: subwidth,
             height: subheight
         }, level+1);
         this.nodes[2] = new Quadtree({
-            x: this.bounds.x + subwidth,
-            y: this.bounds.y,
+            x: this.bounds.x,
+            y: this.bounds.y + subheight,
             width: subwidth,
             height: subheight
         }, level+1);
-        this.nodes[3] = new Quadtree({
-            x: this.bounds.x + subwidth,
+        this.nodes[1] = new Quadtree({
+            x: this.bounds.x,
             y: this.bounds.y,
             width: subwidth,
             height: subheight
