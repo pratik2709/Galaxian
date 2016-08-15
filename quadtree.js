@@ -57,7 +57,7 @@ function Quadtree(boundBox, lvl){
         }
         if(this.nodes.length){
             var index = this.getIndex(obj);
-            if(index == -1){
+            if(index != -1){
                 this.nodes[index].insert(obj);
                 return;
             }
@@ -71,7 +71,7 @@ function Quadtree(boundBox, lvl){
             var i = 0;
             while(i < objects.length){
                 var index = this.getIndex(objects[i]);
-                if(index == -1){
+                if(index != -1){
                     this.nodes[index].insert(objects.splice(i,1)[0]);
                 }
                 else{
@@ -84,7 +84,7 @@ function Quadtree(boundBox, lvl){
 
     };
 
-    this.getIndex = function(){
+    this.getIndex = function(obj){
         var index = -1;
         var verticalMidpoint = this.bounds.x + this.bounds.width/2;
         var horizontalMidpoint = this.bounds.y + this.bounds.height/2;
