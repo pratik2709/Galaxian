@@ -179,6 +179,9 @@ function Ship(){
 	var fireRate = 15; //why
 	var counter = 0;
 
+    this.collidableWith = "enemyBullet";
+    this.type = "ship";
+
 	this.draw = function(){
 		this.context.drawImage(imageRepository.spaceship, this.x,this.y);
 	};
@@ -210,7 +213,10 @@ function Ship(){
 					this.y = this.canvasHeight - this.height;
 			}		
 
-			this.draw();	
+            if(!this.isColliding){
+                this.draw();
+            }
+
 		}
 
 		if(KEY_STATUS.space && counter >= fireRate){
