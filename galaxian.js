@@ -416,6 +416,12 @@ function Game() {
 }
 
 function animate() {
+    game.quadtree.clear();
+    game.quadtree.insert(game.ship);
+    game.quadtree.insert(game.ship.bulletPool.getPool());
+    game.quadtree.insert(game.enemyPool.getPool());
+    game.quadtree.insert(game.enemyBulletPool.getPool());
+
 	requestAnimFrame( animate );
 	game.background.draw();
 	game.ship.move();

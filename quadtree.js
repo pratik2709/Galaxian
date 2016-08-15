@@ -11,6 +11,14 @@ function Quadtree(boundBox, lvl){
     var level = lvl || 0;
     var maxLevels = 5;
 
+	this.clear = function() {
+		objects = [];
+		for (var i = 0; i < this.nodes.length; i++) {
+			this.nodes[i].clear();
+		}
+		this.nodes = [];
+	};
+
     //return all objects from last to first (backwards)
     //pass in an empty array in the beginning
     //somewhat understood
