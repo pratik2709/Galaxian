@@ -71,6 +71,8 @@ function Pool(maxSize) {
 				var bullet = new Bullet("bullet");
 				bullet.init(0,0, imageRepository.bullet.width,
 				            imageRepository.bullet.height);
+                bullet.collidableWith = "enemy";
+                bullet.type = "bullet";
 				pool[i] = bullet;
 			}			
 		}
@@ -85,6 +87,8 @@ function Pool(maxSize) {
 			for (var i = 0; i < size; i++) {
 				var bullet = new Bullet("enemyBullet");
 				bullet.init(0,0, imageRepository.enemyBullet.width, imageRepository.enemyBullet.height);
+                bullet.collidableWith = "ship";
+                bullet.type = "enemyBullet";
 				pool[i] = bullet;
 			}
 		}		
@@ -119,7 +123,18 @@ function Pool(maxSize) {
 				break;
 			}
 		}
-	}	
+	};
+
+    this.getPool = function(){
+        var obj = [];
+        for(var i = 0; i < size; i++){
+            if(pool[i].in_use){
+                obj.push(pool[i]);
+            }
+
+        }
+        return obj;
+    };
 }
 
 
@@ -140,7 +155,9 @@ function Bullet(object){
 		this.context.clearRect(this.x-1, this.y-1, this.width+1, this.height+1); //to avoid the blur ?
 		this.y -= this.speed; 
 
-
+        if(this.isColliding){
+            return true;
+        }
 
 		if(self === "bullet" && this.y + this.height <= 0){
 			return true;
