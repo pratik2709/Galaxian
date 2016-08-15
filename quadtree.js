@@ -38,7 +38,7 @@ function Quadtree(boundBox, lvl){
         }
         var index = this.getIndex(obj);
         if(index != -1 && this.nodes.length){
-            this.nodes[index].getAllObjects(returnedObjects, obj);
+            this.nodes[index].findObjects(returnedObjects, obj);
         }
         for(var i = 0, len = objects.length; i < len; i++){
             returnedObjects.push(objects[i]);
