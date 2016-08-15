@@ -165,6 +165,7 @@ function Bullet(object){
 		this.y = 0;
 		this.speed = 0;
 		this.in_use = false;
+        this.isColliding = false;
 	};
 
 }
@@ -240,6 +241,9 @@ function Enemy(){
 	var chance = 0;
 	this.in_use = false;
 
+    this.collidableWith = "bullet";
+    this.type = "enemy";
+
 	this.spawn = function(x, y, speed){
 		this.x = x;
 		this.y = y;
@@ -274,20 +278,25 @@ function Enemy(){
 			this.y -= 5; //why
 			this.speedX = -this.speed; // go left first
 		}
-		this.context.drawImage(imageRepository.enemy, this.x, this.y);
-
-		//verify formula
-		chance = Math.floor(Math.random()*101);
-		if (chance/100 < percentFire) {
-			this.fire();
-		}		
+        if(!this.isColliding){
+            this.context.drawImage(imageRepository.enemy, this.x, this.y);
+            //verify formula
+            chance = Math.floor(Math.random()*101);
+            if (chance/100 < percentFire) {
+                this.fire();
+            }
+            return false;
+        }
+        else{
+            return true;
+        }
 
 	};
 
 	//why
 	this.fire = function() {
 		game.enemyBulletPool.get(this.x+this.width/2, this.y+this.height, -2.5); // minus because it will incresase y value.. just the way it is
-	}	
+	}	;
 
 	this.clear = function() {
 		this.x = 0;
@@ -296,6 +305,7 @@ function Enemy(){
 		this.speedX = 0;
 		this.speedY = 0;
 		this.in_use = false;
+        this.isColliding = false;
 	};	
 
 }
