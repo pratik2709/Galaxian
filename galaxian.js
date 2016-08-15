@@ -231,9 +231,10 @@ function Ship(){
 					this.y = this.canvasHeight - this.height;
 			}		
 
-            if(!this.isColliding){
-                this.draw();
-            }
+            this.draw();
+            //if(!this.isColliding){
+            //    this.draw();
+            //}
 
 		}
 
