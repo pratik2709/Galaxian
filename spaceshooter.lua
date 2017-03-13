@@ -10,7 +10,7 @@ function _init()
     }
     bullets = {}
     enemies = {}
-    for i=1,4 do
+    for i=1,10 do
         add(enemies, {
             sp = 17,
             m_x = 10*i,
@@ -21,6 +21,25 @@ function _init()
             box = {x1=0, y1=0, x2=7, y2=7}
         })
     end
+    start()
+end
+
+function start()
+    _update = update_game
+    _draw = draw_game
+end
+
+function game_over()
+    _update = update_over
+    _draw = draw_over
+end
+
+function update_over()
+end
+
+function draw_over()
+    cls()
+    print("game over")
 end
 
 function res_box(s)
@@ -75,7 +94,7 @@ function downward()
     ship.y = ship.y + ship.speed
 end
 
-function _update()
+function update_game()
     t = t + 1
 
     for e in all(enemies)
@@ -131,7 +150,7 @@ function _update()
     end
 end
 
-function _draw()
+function draw_game()
     cls()
     spr(ship.sp, ship.x, ship.y)
     for b in all(bullets)
