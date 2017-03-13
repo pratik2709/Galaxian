@@ -34,8 +34,16 @@ end
 
 function collision(a, b)
     --todo
-    box_a = res_box(a)
-    box_b = res_box(b)
+    local box_a = res_box(a)
+    local box_b = res_box(b)
+
+    if box_a.x1 > box_b.x2 or box_a.y1 > box_b.y2
+        or box_b.x1 > box_a.x2 or box_b.y1 > box_a.y2
+        then
+        return false
+    end
+
+    return true
 end
 
 
@@ -93,7 +101,7 @@ function _update()
             do
             if collision(b, e)
                 then
-                shio.p = ship.p + 1
+                ship.p = ship.p + 1
                 del(enemies, e)
             end
         end
