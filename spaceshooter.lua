@@ -1,19 +1,30 @@
-t = 0
 function _init()
-    ship = { speed = 1, sp = 1, x = 60, y = 60 }
+    t = 0
+    ship = { speed = 1,
+        sp = 1,
+        x = 60,
+        y = 60,
+        h = 3,
+        p = 0
+    }
     bullets = {}
     enemies = {}
-    for i=1,10 do
+    for i=1,4 do
         add(enemies, {
             sp = 17,
             m_x = 10*i,
             m_y = 2*i,
-            x = -32,
+            x = -32, --why negative ?
             y = -32,
             r = 12
         })
     end
 end
+
+function collision(a, b)
+    --todo
+end
+
 
 function fire()
     local b = {
@@ -47,8 +58,14 @@ function _update()
 
     for e in all(enemies)
     do
+        -- why t ??
         e.x = e.r*sin(t/50) + e.m_x
         e.y = e.r*cos(t/50) + e.m_y
+        if collision(e, ship)
+            then
+            --todo
+        end
+
     end
 
     for b in all(bullets)
@@ -58,7 +75,15 @@ function _update()
         if b.x < 0 or b.x > 128 or b.y < 0 or b.y > 128 then
             del(bullets, b)
         end
+        for e in all(enemies)
+            do
+            if collision(b, e)
+                then
+                del(enemies, e)
+            end
+        end
     end
+
 
     if t % 8 < 4 then
         ship.sp = 2
