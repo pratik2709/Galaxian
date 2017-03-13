@@ -5,7 +5,8 @@ function _init()
         x = 60,
         y = 60,
         h = 3,
-        p = 0
+        p = 0,
+        box = {x1=0, y1=0, x2=7, y2=7}
     }
     bullets = {}
     enemies = {}
@@ -16,13 +17,25 @@ function _init()
             m_y = 2*i,
             x = -32, --why negative ?
             y = -32,
-            r = 12
+            r = 12,
+            box = {x1=0, y1=0, x2=7, y2=7}
         })
     end
 end
 
+function res_box(s)
+    local box = {}
+    box.x1 = s.box.x1 + s.x
+    box.y1 = s.box.y1 + s.y
+    box.x2 = s.box.x2 + s.x
+    box.y2 = s.box.y2 + s.y
+    return box
+end
+
 function collision(a, b)
     --todo
+    box_a = res_box(a)
+    box_b = res_box(b)
 end
 
 
@@ -32,7 +45,8 @@ function fire()
         x = ship.x,
         y = ship.y,
         dx = 0,
-        dy = -3
+        dy = -3,
+        box = {x1=0, y1=0, x2=5, y2=5}
     }
     add(bullets, b)
 end
@@ -79,6 +93,7 @@ function _update()
             do
             if collision(b, e)
                 then
+                shio.p = ship.p + 1
                 del(enemies, e)
             end
         end
