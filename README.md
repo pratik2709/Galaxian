@@ -16,7 +16,7 @@ http://namastespock.com/2017/03/14/adventures-with-pico-8/
 [Pico8](https://www.lexaloffle.com/pico-8.php) - Game Engine Framework
 
 ## License
-license.md
+[MIT license](license.md)
 
 ## Acknowledgments and Sources
 This code is based on the following sources:
